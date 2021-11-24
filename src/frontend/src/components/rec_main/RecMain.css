@@ -1,0 +1,72 @@
+#app { height: 100% }
+html,
+body {
+  position: relative;
+  height: 100%;
+}
+
+body {
+  background: #FDFDFD;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+.swiper {
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  height: auto;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+}
+.img-wrapper:hover .darkness{
+  opacity:0.4;
+}
+.img-wrapper:hover .content{
+  opacity:100;
+}
+
+.darkness {
+  position:absolute;
+  top:0;
+  left:0;
+  width:inherit;
+  height:inherit;
+  background:#000000;
+  opacity:0;
+  transition:all 0.15s linear;
+  z-index: 0;
+}
+.content{
+position:absolute;
+color: white;
+  top:0;
+  left:0;
+  width:inherit;
+  height:inherit;
+  opacity:0;
+  transition:all 0.15s linear;
+  z-index: 1;
+}
+
+*{
+    -ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+
+.rodal-zoom-enter {
+    overflow-y: auto;
+}

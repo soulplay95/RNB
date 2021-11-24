@@ -1,0 +1,61 @@
+.loginButton{
+    background-color: #6FB1FF !important;
+    font-family: NotoSansKR-Regular !important;
+    font-size: 16px !important;
+    padding: 4px !important;
+}
+
+.joinButton{
+    background-color: #3F51B5 !important;
+    font-family: NotoSansKR-Regular !important;
+    font-size: 16px !important;
+    padding: 4px !important;
+}
+
+.loginContent::after {
+  display: block;
+  content: '';
+  clear: both;
+}
+
+.sns-hr {
+        display: flex;
+        flex-basis: 100%;
+        align-items: center;
+        color: rgba(0, 0, 0, 0.35);
+        font-family: NotoSansKR-Regular;
+        font-size: 18px;
+        width: 100%;
+        padding-top: 20px;
+        padding-bottom: 20px;
+      }
+      .sns-hr::before{
+          content: "";
+        flex-grow: 1;
+        background: rgba(0, 0, 0, 0.35);
+        height: 1px;
+        font-size: 0px;
+        line-height: 0px;
+        margin-right: 12px;
+      }
+      .sns-hr::after {
+        content: "";
+        flex-grow: 1;
+        background: rgba(0, 0, 0, 0.35);
+        height: 1px;
+        font-size: 0px;
+        line-height: 0px;
+        margin-left: 12px;
+      }
+
+.loginButtonGoogle{
+    background-color: white !important;
+    color: black !important;
+    font-family: NotoSansKR-Regular !important;
+}
+
+.loginButtonNaver{
+    background-color: #1dc800 !important;
+    color: white !important;
+    font-family: NotoSansKR-Regular !important;
+}

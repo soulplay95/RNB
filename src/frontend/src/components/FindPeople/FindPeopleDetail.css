@@ -1,0 +1,18 @@
+.joinButton{
+    width:200px;
+    font-family: NotoSansKR-Regular !important;
+
+}
+
+.joinButtonCant{
+    background-color: #DBDBDB !important;
+    width:200px;
+    font-family: NotoSansKR-Regular !important;
+
+}
+
+.MuiSlider-markLabel{
+    font-family: NotoSansKR-Regular !important;
+    color:#B7B7B7 !important;
+    top:-15px !important;
+}

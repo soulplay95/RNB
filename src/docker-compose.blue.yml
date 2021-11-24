@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  rnb:
+    image: rnb_be
+    volumes:
+      - /home/ubuntu/jenkins_home/workspace/RNB/src/backend/build/libs:/usr/src/app
+    ports:
+      - '8081:8080'

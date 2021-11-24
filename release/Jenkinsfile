@@ -1,0 +1,118 @@
+// pipeline {
+// 	agent any
+	
+// 	stages {
+// 		stage('Prepare') {
+// 			steps {
+// 				dir('rnb') {
+// 					git(
+// 						url: 'https://lab.ssafy.com/s05-bigdata-rec/S05P21A505',
+// 						credentialsId: 'rnb',
+// 						branch: 'develop'
+// 						)
+// 				}
+// 			}
+// 		}
+// 		stage('Build') {
+// 			parallel {
+// 				stage('FE build') {
+// 					steps {
+// 							sh 'docker build -t frontend ./src/frontend'
+// 					}
+// 				}
+// 				stage('BE build') {
+// 					steps {
+// 							sh 'docker build -t backend ./src/backend'
+// 					}
+// 				}
+// 			}
+// 		}
+// 		stage('Deploy') {
+// 			steps {
+// 				dir('rnb/src') {
+// 					sh "pwd"
+// 					sh 'docker-compose down'
+// 					sh "docker system prune -a"
+// 					sh "docker-compose up -d --build"
+// 				}
+// 			}
+// 		}
+// 	}
+// }
+
+// pipeline {
+// 	agent any
+
+// 	options { skipDefaultCheckout(false) }
+
+// 	stages {
+// 		stage('Prepare') {
+// 			steps {
+// 				echo "Current workspace: ${workspace}"
+// 				checkout scm
+// 			}
+// 		}
+// 		stage('Deploy') {
+// 			steps {
+// 				sh 'chmod +x ./src/backend/deploy.sh'
+// 				sh './src/backend/deploy.sh' 
+// 			}
+// 		}
+// 	}
+// }
+
+pipeline {
+	agent none
+
+	options { skipDefaultCheckout(false) }
+
+	stages {
+		stage('git pull') { 
+			agent any
+
+			steps {
+				checkout scm
+			}
+		}
+		stage('Docker build') {
+			agent any
+
+			steps {
+				sh 'docker build -t frontend:latest ./src/frontend' 
+				sh 'docker build -t backend:latest ./src/backend'
+			}
+		}
+		stage('Docker run') {
+			agent any
+
+			steps {
+				sh 'docker ps -f name=frontend -q \
+        | xargs --no-run-if-empty docker container stop'
+				sh 'docker ps -f name=backend -q \
+		| xargs --no-run-if-empty docker container stop'
+
+				
+				sh 'docker container ls -a -f name=frontend -q \
+        | xargs -r docker container rm'
+				sh 'docker container ls -a -f name=backend -q \
+		| xargs -r docker container rm'
+
+				
+				sh 'docker images -f dangling=true && \
+				docker rmi -f $(docker images -f dangling=true -q)' 
+				
+				sh 'docker run -d --name frontend \
+				-p 80:80 \
+				-p 443:443 \
+				-v /etc/letsencrypt:/cert \
+				-v /etc/localtime:/etc/localtime:ro \
+				--network rnb \
+				frontend:latest'
+
+				sh 'docker run -d -p 8080 --name backend \
+		--network rnb backend:latest'
+
+			}
+		}
+	}
+}

@@ -1,0 +1,17 @@
+.addGroupButton{
+    background-color: #3F51B5 !important;
+    font-family: NotoSansKR-Regular !important;
+    font-size: 18px !important;
+    color: white;
+    float:left;
+    width:47%;
+}
+
+.backGroupButton{
+    background-color: #DBDBDB !important;
+    font-family: NotoSansKR-Regular !important;
+    font-size: 18px !important;
+    color: white;
+    float:right;
+    width:47%;
+}
